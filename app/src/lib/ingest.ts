@@ -1,6 +1,5 @@
 import { prisma } from './db'
 import { fetchRssSources, fetchRedditSources, fetchYouTubeSources } from './fetchers'
-import { summarizeBatch } from './summarize'
 import type { RawArticle } from '@/types'
 
 export async function ingestAll() {
@@ -23,11 +22,10 @@ export async function ingestAll() {
 
   // Insert new articles (skip existing)
   let inserted = 0
-  const toSummarize: Array<{ id: string; title: string; content: string }> = []
 
   for (const article of unique) {
     try {
-      const created = await prisma.article.create({
+      await prisma.article.create({
         data: {
           title: article.title,
           url: article.url,
@@ -41,13 +39,6 @@ export async function ingestAll() {
         },
       })
       inserted++
-      if (article.content || article.title) {
-        toSummarize.push({
-          id: created.id,
-          title: article.title,
-          content: article.content ?? article.title,
-        })
-      }
     } catch {
       // skip duplicates (unique URL constraint)
     }
