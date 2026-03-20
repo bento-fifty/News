@@ -2,7 +2,7 @@ import Parser from 'rss-parser'
 import type { RawArticle, FeedSource } from '@/types'
 
 const parser = new Parser({
-  timeout: 10000,
+  timeout: 5000,
   customFields: {
     item: [['media:content', 'mediaContent'], ['media:thumbnail', 'mediaThumbnail']],
   },

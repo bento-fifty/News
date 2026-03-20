@@ -41,7 +41,7 @@ export async function fetchYouTubeSources(): Promise<RawArticle[]> {
         url.searchParams.set('maxResults', '5')
         url.searchParams.set('key', apiKey)
 
-        const res = await fetch(url.toString(), { signal: AbortSignal.timeout(10000) })
+        const res = await fetch(url.toString(), { signal: AbortSignal.timeout(5000) })
         if (!res.ok) return
 
         const json = await res.json() as { items: YouTubeItem[] }

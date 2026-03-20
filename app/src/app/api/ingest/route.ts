@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { ingestAll } from '@/lib/ingest'
 
+// Allow up to 60s for ingestion (requires Vercel Pro; Hobby plan max is 10s)
+export const maxDuration = 60
+
 export async function POST(request: NextRequest) {
   // Simple secret key check to prevent unauthorized triggers
   const authHeader = request.headers.get('authorization')

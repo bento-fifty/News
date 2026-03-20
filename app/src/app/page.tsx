@@ -19,15 +19,23 @@ async function ArticleFeed({ source, topic, page }: { source?: string; topic?: s
     ...(topic ? { topic } : {}),
   }
 
-  const [articles, total] = await Promise.all([
-    prisma.article.findMany({
-      where,
-      orderBy: [{ score: 'desc' }, { publishedAt: 'desc' }],
-      take: limit,
-      skip,
-    }),
-    prisma.article.count({ where }),
-  ])
+  let articles: Awaited<ReturnType<typeof prisma.article.findMany>> = []
+  let total = 0
+
+  try {
+    ;[articles, total] = await Promise.all([
+      prisma.article.findMany({
+        where,
+        orderBy: [{ score: 'desc' }, { publishedAt: 'desc' }],
+        take: limit,
+        skip,
+      }),
+      prisma.article.count({ where }),
+    ])
+  } catch (error) {
+    console.error('Database query failed:', error)
+    return <EmptyState />
+  }
 
   if (articles.length === 0) return <EmptyState />
 

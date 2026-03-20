@@ -53,17 +53,8 @@ export async function ingestAll() {
     }
   }
 
-  // Summarize newly inserted articles if API key is available
-  if (process.env.ANTHROPIC_API_KEY && toSummarize.length > 0) {
-    const summaries = await summarizeBatch(toSummarize.slice(0, 20))
-
-    for (const [id, summary] of summaries) {
-      await prisma.article.update({
-        where: { id },
-        data: { summary },
-      })
-    }
-  }
+  // TODO: Summarization moved out of ingest to avoid Vercel timeout
+  // Can be triggered separately via a dedicated /api/summarize endpoint
 
   await prisma.fetchLog.create({
     data: {

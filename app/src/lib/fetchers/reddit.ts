@@ -36,7 +36,7 @@ async function fetchSubreddit(subreddit: RedditSubreddit): Promise<RawArticle[]>
         'User-Agent': 'InfoAggregator/1.0',
         'Accept': 'application/json',
       },
-      signal: AbortSignal.timeout(10000),
+      signal: AbortSignal.timeout(5000),
     }
   )
 
