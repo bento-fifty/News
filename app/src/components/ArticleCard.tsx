@@ -1,3 +1,5 @@
+'use client'
+
 import { formatDistanceToNow } from 'date-fns'
 import { zhTW } from 'date-fns/locale'
 import { ExternalLink, TrendingUp, Rss, MessageCircle, Youtube } from 'lucide-react'
