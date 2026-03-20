@@ -1,0 +1,14 @@
+# Next.js
+app/.next/
+app/out/
+app/node_modules/
+app/.env
+!app/.env.example
+
+# Prisma
+app/prisma/dev.db
+app/prisma/dev.db-journal
+app/prisma/dev.db-wal
+
+# Build
+app/.turbo/
