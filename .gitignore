@@ -5,10 +5,13 @@ app/node_modules/
 app/.env
 !app/.env.example
 
-# Prisma
+# Prisma / SQLite
 app/prisma/dev.db
 app/prisma/dev.db-journal
 app/prisma/dev.db-wal
+app/dev.db
+app/dev.db-journal
+app/dev.db-wal
 
 # Build
 app/.turbo/
