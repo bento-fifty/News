@@ -1,6 +1,6 @@
 -- CreateTable
 CREATE TABLE "Article" (
-    "id" TEXT NOT NULL PRIMARY KEY,
+    "id" TEXT NOT NULL,
     "title" TEXT NOT NULL,
     "url" TEXT NOT NULL,
     "summary" TEXT,
@@ -10,19 +10,23 @@ CREATE TABLE "Article" (
     "sourceName" TEXT NOT NULL,
     "topic" TEXT NOT NULL DEFAULT 'Tech',
     "score" INTEGER NOT NULL DEFAULT 0,
-    "publishedAt" DATETIME NOT NULL,
-    "fetchedAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+    "publishedAt" TIMESTAMP(3) NOT NULL,
+    "fetchedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "Article_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "FetchLog" (
-    "id" TEXT NOT NULL PRIMARY KEY,
+    "id" TEXT NOT NULL,
     "source" TEXT NOT NULL,
     "status" TEXT NOT NULL,
     "count" INTEGER NOT NULL DEFAULT 0,
     "error" TEXT,
-    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "FetchLog_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
